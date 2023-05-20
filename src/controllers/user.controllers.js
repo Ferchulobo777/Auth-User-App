@@ -97,7 +97,7 @@ const login = catchError(async (req, res) => {
 
 
     const resetPassword = catchError(async(req,res) => {
-        const { firstName, lastName, email, frontBaseUrl } = req.body;
+        const { email, frontBaseUrl } = req.body;
         const user = await User.findOne({ where: { email } });
         if(!user) return res.status(401).json({message: 'Invalid Credentials'})
 
@@ -108,7 +108,7 @@ const login = catchError(async (req, res) => {
             to:email,
             subject: "Reset your account password",
             html:` 
-                <h1>Hello ${firstName} ${lastName}</h1>
+                <h1>Hello ${user.firstName} ${user.lastName}</h1>
                 <b>We received a request to reset your account password. To assist you in regaining access, please click on the following link.</b>
                 <a href="${link}">${link}</a>
           `});
