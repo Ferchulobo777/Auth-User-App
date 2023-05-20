@@ -34,7 +34,7 @@ const create = catchError(async(req, res) => {
             <a href="${link}">${link}</a>
       `});
       await EmailCode.create({ code, userId:user.id })
-      return res.status(201).json({user, message:'Email Sent Succefully'});
+      return res.status(201).json(user);
 });
 
 const getOne = catchError(async(req, res) => {
@@ -113,7 +113,7 @@ const login = catchError(async (req, res) => {
                 <a href="${link}">${link}</a>
           `});
           await EmailCode.create({ code, userId:user.id })
-          return res.json({ message: 'Email sent successfully' });
+          return res.json(user);
     })
 
     const resetCode = catchError(async (req, res) => {
